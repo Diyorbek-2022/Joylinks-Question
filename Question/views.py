@@ -3,13 +3,15 @@ from pathlib import Path
 
 import cv2
 from django.shortcuts import get_object_or_404
+from environs import Env
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import User
 from .serializers import User_Serializer, Sertifikate_Serializer, Sertifikate_Info_Serializer
-
+env = Env()
+env.read_env()
 colour_light_blue = 255, 255, 0
 
 
@@ -67,16 +69,16 @@ def score_calculation(test: dict):
     count_true = int()
     count_false = int()
     correct_answers = {
-        "1": "C",
-        "2": "A",
-        "3": "D",
-        "4": "C",
-        "5": "A",
-        "6": "C",
-        "7": "C",
-        "8": "A",
-        "9": "C",
-        "10": "B"
+        "1": env.str("q1_"),
+        "2": env.str("q2_"),
+        "3": env.str("q3_"),
+        "4": env.str("q4_"),
+        "5": env.str("q5_"),
+        "6": env.str("q6_"),
+        "7": env.str("q7_"),
+        "8": env.str("q8_"),
+        "9": env.str("q9_"),
+        "10": env.str("q10_")
     }
     for key, value in test.items():
         true_answer = correct_answers.get(key)
