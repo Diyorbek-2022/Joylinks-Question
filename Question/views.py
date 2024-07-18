@@ -82,7 +82,10 @@ def score_calculation(test: dict):
     }
     for key, value in test.items():
         true_answer = correct_answers.get(key)
-        if true_answer == value:
+        if str(true_answer) == "":
+            count_false += 1
+            continue
+        elif true_answer == str(value):
             count_true += 1
         else:
             count_false += 1
