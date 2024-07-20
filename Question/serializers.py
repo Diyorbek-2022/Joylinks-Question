@@ -9,7 +9,7 @@ class User_Serializer(ModelSerializer):
         fields = '__all__'
 
 
-class Sertifikate_Serializer(ModelSerializer):
+class Certificate_Serializer(ModelSerializer):
     class Meta:
         model = User
         fields = ['correct_answer', 'wrong_answer', 'score']

@@ -2,22 +2,17 @@ from pathlib import Path
 
 from environs import Env
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# environs kutubxonasidan foydalanish
 env = Env()
 env.read_env()
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -123,21 +118,20 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / "media"
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-
-STATICFILES_FINDERS = [
+STATICFILES_FINDER = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-
 # whitenoise
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 # Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 

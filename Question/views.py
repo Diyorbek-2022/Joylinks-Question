@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import User
-from .serializers import User_Serializer, Sertifikate_Serializer
+from .serializers import User_Serializer, Certificate_Serializer
 
 env = Env()
 env.read_env()
@@ -22,8 +22,6 @@ def Create_User(request):
 
 
 def score_calculation(test: dict):
-    count_true = int()
-    count_false = int()
     correct_answers = {
         "1": env.str("q1_"),
         "2": env.str("q2_"),
@@ -34,8 +32,9 @@ def score_calculation(test: dict):
         "7": env.str("q7_"),
         "8": env.str("q8_"),
         "9": env.str("q9_"),
-        "10": env.str("q10_")
-    }
+        "10": env.str("q10_")}
+    count_true = int()
+    count_false = int()
     for key, value in test.items():
         true_answer = correct_answers.get(key)
         if str(true_answer) == "":
@@ -63,10 +62,8 @@ def Finish_User(request):
                 data={"true_answer": count_true, "false_answer": count_false, "score": count_true * 10,
                       "status": False},
                 status=status.HTTP_200_OK)
-        serializer = Sertifikate_Serializer(user,
-                                            data={"correct_answer": count_true, "wrong_answer": count_false,
-                                                  "score": count_true * 10}
-                                            )
+        serializer = Certificate_Serializer(user, data={"correct_answer": count_true, "wrong_answer": count_false,
+                                                        "score": count_true * 10})
 
         if serializer.is_valid():
             serializer.save()

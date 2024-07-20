@@ -11,6 +11,7 @@ class User(models.Model):
     correct_answer = models.IntegerField(blank=True, null=True)
     wrong_answer = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
+    is_calling = models.BooleanField(default=False)
     created_time = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
@@ -21,7 +22,5 @@ class User(models.Model):
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
 
-    def __str__(self):
-        return self.full_name
-
-
+    # def __str__(self):
+    #     return self.full_name

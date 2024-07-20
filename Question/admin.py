@@ -6,9 +6,10 @@ from .models import User
 # Register your models here.
 
 
-admin.site.register(User)
-# class register_user(admin.ModelAdmin):
-#     list_display = ['user_id', 'full_name', 'email', 'score']
-#     ordering = ['-correct_answer', '-created_time']
-#     search_fields = ['first_name']
-#     list_filter = ['score', 'created_time']
+@admin.register(User)
+class register_user(admin.ModelAdmin):
+    list_display = ['user_id', 'full_name', 'email', 'score', 'is_calling']
+    list_filter = ['score', 'is_calling', 'created_time']
+    list_editable = ['is_calling']
+    ordering = ['-correct_answer']
+    search_fields = ['first_name', 'last_name']
