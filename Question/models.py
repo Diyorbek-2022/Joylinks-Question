@@ -12,6 +12,7 @@ class User(models.Model):
     wrong_answer = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(blank=True, null=True)
     is_calling = models.BooleanField(default=False)
+    received_a_certificate = models.BooleanField(default=False)
     created_time = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
 
