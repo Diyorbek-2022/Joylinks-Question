@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 from environs import Env
@@ -98,7 +98,7 @@ DATABASES = {
         'USER': env.str('PGUSER'),
         'PASSWORD': env.str('PGPASSWORD'),
         'HOST': env.str('PGHOST'),
-        'PORT': 5432,
+        'PORT': env.str("PGPORT"),
         'OPTIONS': {
             'sslmode': 'require',
         },
@@ -139,7 +139,7 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / "media"
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [os.path.join(BASE_DIR / 'static')]
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
